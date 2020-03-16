@@ -3,3 +3,6 @@ class City:
         self.name = name
         self.long = long
         self.lat = lat
+
+    def __str__(self):
+        return self.name+" "+str(self.long)+" "+str(self.lat) 

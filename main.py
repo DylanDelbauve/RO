@@ -5,6 +5,7 @@ def main():
     window = win.Window()
     manager = appManager.AppManager()
     window.setManager(manager)
+    window.geometry("200x200")
     manager.setWindow(window)
     window.mainloop()
     

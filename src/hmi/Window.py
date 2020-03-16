@@ -12,14 +12,21 @@ class Window(Tk):
 
     def openfile(self):
         file = open(fd.askopenfilename(), "r")
-        return file
+        cities = self.manager.readFile(file)
+        self.showCities(cities)
+        
 
     def createMenu(self):
         menu = Menu(self)
         menuFile = Menu(menu, tearoff=0)
-        menuFile.add_command(label="Import", command=self.openfilemanager)
+        menuFile.add_command(label="Import", command=self.openfile)
         menu.add_cascade(label="File", menu=menuFile)
         self.config(menu = menu)
 
     def setManager(self, manager):
         self.manager = manager
+
+    def showCities(self,cities):
+        for city in cities:
+            self.__listCities.insert('end', city.__str__())
+            
