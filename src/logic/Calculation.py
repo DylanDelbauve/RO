@@ -19,4 +19,4 @@ def distanceBtw2CitiesEarth(src,dest):
     return lambda res: int(result*(10**3))/(10**3) 
 
 def distance(src,dest):
-    return sqrt((dest.longitude-src.longitude)**2+(dest.latitude - src.latitude)**2)*100
+    return sqrt((dest.long-src.long)**2+(dest.lat-src.lat)**2)*100

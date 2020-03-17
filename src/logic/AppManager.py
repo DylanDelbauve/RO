@@ -20,3 +20,7 @@ class AppManager:
     def random(self):
         rand = algo.Algo(self.cities)
         return rand.random()
+    
+    def increasing(self):
+        inc = algo.Algo(self.cities)
+        return inc.increasing()
