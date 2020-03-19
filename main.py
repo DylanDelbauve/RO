@@ -5,6 +5,7 @@ def main():
     manager = appManager.AppManager()
     window = win.Window(manager)
     window.geometry("200x200")
+    window.title("Recherche Opérationnelle")
     manager.setWindow(window)
     window.mainloop()
     

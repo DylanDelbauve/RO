@@ -8,8 +8,10 @@ class Window(Tk):
         Tk.__init__(self)
         self.manager = manager
         self.createMenu()
-        self.__listCities = Listbox()
-        self.__listCities.pack()
+        self.cost = Label(text="")
+        self.cost.pack()
+        self.listCities = Listbox()
+        self.listCities.pack()
         self.result = Label(text="")
         self.result.pack()
         
@@ -22,7 +24,7 @@ class Window(Tk):
         file.close()
         
     def exportFile(self):
-        file = open(fd.asksaveasfilename(title = "Unamed", filetypes=(('text files', 'txt'),)), "w")
+        file = open(fd.asksaveasfilename(title="Unamed", filetypes=(('text files', 'txt'),)), "w")
         file.write(self.result['text'])
         file.close()
 
@@ -37,6 +39,7 @@ class Window(Tk):
         menuAlgo.add_command(label="Random", command=self.randomAlgo)
         menuAlgo.add_command(label="Increasing", command=self.increaseAlgo)
         menuAlgo.add_command(label="neighbour", command=self.randomAlgo)
+        menu.add_command(label="Cost", command=self.cost)
 
         self.config(menu = menu)
 
@@ -45,12 +48,15 @@ class Window(Tk):
 
     def showCities(self,cities):
         for city in cities:
-            self.__listCities.insert('end', city.__str__())
+            self.listCities.insert('end', city.str())
     
     def randomAlgo(self):
         self.result['text'] = self.manager.random()
 
     def increaseAlgo(self):
         self.result['text'] = self.manager.increasing()
+
+    def cost(self):
+        self.cost['text'] = self.manager.cost()
 
             

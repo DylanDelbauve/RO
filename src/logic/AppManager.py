@@ -5,22 +5,26 @@ class AppManager:
     def __init__(self):
         self.window = None
         self.cities = []
+        self.lastAlgo = None
 
     
-    def setWindow(self,window):
+    def setWindow(self, window):
         self.window = window
 
-    def readFile(self,file):
+    def readFile(self, file):
         data = file.readlines()
         for line in data:
             fields = line.split(" ")
-            self.cities.append(city.City(fields[0], fields[1], fields[2]))
+            self.cities.append(city.City(int(fields[0]), float(fields[1]), float(fields[2])))
         return self.cities
 
     def random(self):
-        rand = algo.Algo(self.cities)
-        return rand.random()
+        self.lastAlgo = algo.Algo(self.cities)
+        return self.lastAlgo.random()
     
     def increasing(self):
-        inc = algo.Algo(self.cities)
-        return inc.increasing()
+        self.lastAlgo = algo.Algo(self.cities)
+        return self.lastAlgo.increasing()
+
+    def cost(self):
+        return self.lastAlgo.cost()

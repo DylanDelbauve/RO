@@ -12,13 +12,19 @@ class Algo:
         temp = self.cities
         rnd.shuffle(temp)
         for city in temp:
-            self.visited.append(city.name)
+            self.visited.append(city)
         return self.visited
 
     def increasing(self):
-        temp = self.cities
-        for city in temp:
-            self.visited.append(city.name)
-            nextCity = self.cities[+1]
-            self.costs += calculation.distance(city,nextCity)
+        self.visited = self.cities
         return self.visited
+
+    def cost(self):
+        self.costs = 0.0
+        i = 0
+        for i in range(len(self.visited)-1):
+            self.costs += calculation.distance(self.visited[i], self.visited[i+1])
+        return self.costs
+
+    def searchNear(self, cities):
+        tempCities = cities
