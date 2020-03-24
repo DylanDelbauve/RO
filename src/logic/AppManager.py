@@ -26,5 +26,9 @@ class AppManager:
         self.lastAlgo = algo.Algo(self.cities)
         return self.lastAlgo.increasing()
 
+    def searchNear(self):
+        self.lastAlgo = algo.Algo(self.cities)
+        return self.lastAlgo.searchNear()
+
     def cost(self):
         return self.lastAlgo.cost()

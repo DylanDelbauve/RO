@@ -38,7 +38,7 @@ class Window(Tk):
         menu.add_cascade(label="Algo", menu=menuAlgo)
         menuAlgo.add_command(label="Random", command=self.randomAlgo)
         menuAlgo.add_command(label="Increasing", command=self.increaseAlgo)
-        menuAlgo.add_command(label="neighbour", command=self.randomAlgo)
+        menuAlgo.add_command(label="neighbour", command=self.searchNear)
         menu.add_command(label="Cost", command=self.cost)
 
         self.config(menu = menu)
@@ -55,6 +55,9 @@ class Window(Tk):
 
     def increaseAlgo(self):
         self.result['text'] = self.manager.increasing()
+
+    def searchNear(self):
+        self.result['text'] = self.manager.searchNear()
 
     def cost(self):
         self.cost['text'] = self.manager.cost()

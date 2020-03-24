@@ -26,5 +26,19 @@ class Algo:
             self.costs += calculation.distance(self.visited[i], self.visited[i+1])
         return self.costs
 
-    def searchNear(self, cities):
-        tempCities = cities
+    def nearestNeighbor(self, city):
+        res = float('inf')
+        for nextCity in self.cities:
+             if nextCity not in self.visited and calculation.distance(city,nextCity) < res:
+                 res = calculation.distance(city, nextCity)
+                 neighbor = nextCity
+        return neighbor
+
+    def searchNear(self):
+        city = self.cities[0]
+        self.visited.append(city)
+        while len(self.visited) < len(self.cities):
+            nextCity = self.nearestNeighbor(city)
+            self.visited.append(city)
+            city = nextCity
+        return self.visited
