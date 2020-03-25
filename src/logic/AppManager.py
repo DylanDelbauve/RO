@@ -18,17 +18,24 @@ class AppManager:
             self.cities.append(city.City(int(fields[0]), float(fields[1]), float(fields[2])))
         return self.cities
 
-    def random(self):
-        self.lastAlgo = algo.Algo(self.cities)
-        return self.lastAlgo.random()
-    
-    def increasing(self):
-        self.lastAlgo = algo.Algo(self.cities)
-        return self.lastAlgo.increasing()
-
-    def searchNear(self):
-        self.lastAlgo = algo.Algo(self.cities)
-        return self.lastAlgo.searchNear()
-
     def cost(self):
-        return self.lastAlgo.cost()
+        return self.lastAlgo.cost(self.lastAlgo.visited())
+
+    def result(self,algorithm):
+        self.lastAlgo = algo.Algo(self.cities)
+        res = None
+        if algorithm == 0:
+            res = self.lastAlgo.random()
+        elif algorithm == 1:
+            res = self.lastAlgo.increasing()
+        elif algorithm == 2:
+            res = self.lastAlgo.searchNear()
+        elif algorithm == 3:
+            res = self.lastAlgo.localSearch()
+        return res
+
+    def __str__(self):
+        temp = []
+        for city in self.lastAlgo.visited:
+            temp.append(city.id)
+        return temp
