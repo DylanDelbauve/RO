@@ -1,5 +1,7 @@
-import src.logic.City as city
 import src.logic.Algo as algo
+import src.logic.City as city
+
+
 class AppManager:
 
     def __init__(self):
@@ -7,11 +9,10 @@ class AppManager:
         self.cities = []
         self.lastAlgo = None
 
-    
-    def setWindow(self, window):
+    def set_window(self, window):
         self.window = window
 
-    def readFile(self, file):
+    def read_file(self, file):
         data = file.readlines()
         for line in data:
             fields = line.split(" ")
@@ -19,9 +20,9 @@ class AppManager:
         return self.cities
 
     def cost(self):
-        return self.lastAlgo.cost(self.lastAlgo.visited())
+        return self.lastAlgo.cost(self.lastAlgo.visited)
 
-    def result(self,algorithm):
+    def result(self, algorithm):
         self.lastAlgo = algo.Algo(self.cities)
         res = None
         if algorithm == 0:
@@ -29,9 +30,9 @@ class AppManager:
         elif algorithm == 1:
             res = self.lastAlgo.increasing()
         elif algorithm == 2:
-            res = self.lastAlgo.searchNear()
+            res = self.lastAlgo.search_near()
         elif algorithm == 3:
-            res = self.lastAlgo.localSearch()
+            res = self.lastAlgo.local_search()
         return res
 
     def __str__(self):
