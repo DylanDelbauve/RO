@@ -3,6 +3,12 @@ from math import sqrt
 
 
 def distance(src, dest):
+    """ Calcule la distance entre 2 villes
+
+    :param src:
+    :param dest:
+    :return:
+    """
     temp = sqrt((dest.lon - src.lon) ** 2 + (dest.lat - src.lat) ** 2) * 100
     return temp
 
@@ -47,7 +53,8 @@ class Algo:
         return self.costs
 
     def nearest_neighbor(self, city):
-        """
+        """ Recherche la ville voisin la plus proche
+
         :param city: Ville dont on veut trouver le voisin
         :return: le voisin le plus procher
         """
@@ -72,14 +79,24 @@ class Algo:
         return self.visited
 
     def local_search(self):
+        """ Algo de recherche locale
+
+        :return: une tournée de recherche locale
+        """
         self.search_near()
         res = self.visited
         if self.cost(res) > self.cost(self.exchange_near(res)):
             res = self.exchange_near(res)
         if self.cost(res) > self.cost(self.exchange_random(res)):
             res = self.exchange_random(res)
+        return self.visited
 
     def exchange_near(self, tour):
+        """ Teste les voisins d'une tournée par échange de 2 sommets consécutifs
+
+        :param tour: la tournée à tester
+        :return: la nouvelle tournée
+        """
         res = []
         temp = []
         res = self.visited
@@ -95,6 +112,11 @@ class Algo:
         return res
 
     def exchange_random(self, tour):
+        """ Teste les voisins d'une tournée par échange de 2 sommets aléatoires
+
+        :param tour: la tournée à tester
+        :return: la nouvelle tournée
+        """
         res = []
         temp = []
         res = self.visited
