@@ -86,9 +86,7 @@ class Algo:
         temp = self.visited
 
         for i in range(len(self.visited) - 1):
-            city = temp[i]
-            temp[i] = temp[i + 1]
-            temp[i + 1] = city
+            temp[i], temp[i+1] = temp[i+1], temp[i]
             if self.cost(res) > self.cost(temp):
                 res = temp
             else:
@@ -105,10 +103,9 @@ class Algo:
         for i in range(len(self.visited) - 1):
             city = temp[i]
             exit = False
-            if not exit:
-                for j in range(len(self.visited) - 1):
-                    temp[i] = temp[j]
-                    temp[j] = city
+            for j in range(len(self.visited) - 1):
+                if not exit:
+                    temp[i], temp[j] = temp[j], temp[i]
                     if self.cost(res) > self.cost(temp):
                         res = temp
                         exit = True
