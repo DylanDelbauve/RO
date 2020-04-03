@@ -84,11 +84,11 @@ class Algo:
         :return: une tournée de recherche locale
         """
         self.search_near()
-        res = self.visited
+        res = self.visited.copy()
         if self.cost(res) > self.cost(self.exchange_near(res)):
-            res = self.exchange_near(res)
+            res = self.exchange_near(res).copy()
         if self.cost(res) > self.cost(self.exchange_random(res)):
-            res = self.exchange_random(res)
+            res = self.exchange_random(res).copy()
         return self.visited
 
     def exchange_near(self, tour):
@@ -97,17 +97,18 @@ class Algo:
         :param tour: la tournée à tester
         :return: la nouvelle tournée
         """
-        res = []
-        temp = []
-        res = self.visited
-        temp = self.visited
+        res = self.visited.copy()
+        temp = self.visited.copy()
 
-        for i in range(len(self.visited) - 1):
-            temp[i], temp[i+1] = temp[i+1], temp[i]
-            if self.cost(res) > self.cost(temp):
-                res = temp
-            else:
-                temp = res
+        for i in range(len(self.visited)):
+            if i+1 < len(self.visited):
+                temp[i], temp[i+1] = temp[i+1], temp[i]
+                if self.cost(res) > self.cost(temp):
+                    res.clear()
+                    res = temp.copy()
+                else:
+                    temp.clear()
+                    temp = res.copy()
 
         return res
 
@@ -117,20 +118,19 @@ class Algo:
         :param tour: la tournée à tester
         :return: la nouvelle tournée
         """
-        res = []
-        temp = []
-        res = self.visited
-        temp = self.visited
+        res = self.visited.copy()
+        temp = self.visited.copy()
 
-        for i in range(len(self.visited) - 1):
+        for i in range(len(self.visited)):
             city = temp[i]
             exit = False
-            for j in range(len(self.visited) - 1):
+            for j in range(len(self.visited)):
                 if not exit:
-                    temp[i], temp[j] = temp[j], temp[i]
-                    if self.cost(res) > self.cost(temp):
-                        res = temp
-                        exit = True
-                    else:
-                        temp = res
+                    if temp[i] != temp[j]:
+                        temp[i], temp[j] = temp[j], temp[i]
+                        if self.cost(res) > self.cost(temp):
+                            res = temp.copy()
+                            exit = True
+                        else:
+                            temp = res.copy()
         return res
